@@ -1,0 +1,27 @@
+ACTUALIZAR DC DUEL LEAGUE V2 -> V3 SIN PERDER DATOS
+
+PASO 1) En VS Code, termina el servidor con Ctrl + C.
+PASO 2) Haz una copia de seguridad completa de DC_DUELO_PRO, en especial .env y .local-data.
+PASO 3) Descomprime DC_DUELO_V3_ACTUALIZACION.zip.
+PASO 4) Copia server.js y package.json reemplazando los de DC_DUELO_PRO.
+PASO 5) Copia los archivos de public: app.js, styles.css, index.html.
+PASO 6) Copia la carpeta tools y las guías del ZIP.
+PASO 7) ¡NO BORRES .env NI .local-data!
+PASO 8) En .env, cambia OWNER_USERNAME=Caleb y OWNER_PASSWORD a la clave que quieras usar.
+        Por seguridad, evita publicar tu clave en redes, repositorios o capturas.
+PASO 9) En la terminal: npm.cmd install
+PASO 10) CON EL SERVIDOR DETENIDO: npm.cmd run jefe:actualizar
+PASO 11) Inicia el servidor: npm.cmd start
+PASO 12) Abre http://localhost:3000, pulsa Ctrl+Shift+R e ingresa como jefe.
+PASO 13) Personalización: Cantidad máxima de equipos 0 = sin límite.
+PASO 14) Personalización: Jornadas oficiales 2 = ida y vuelta. Guarda.
+PASO 15) Equipos y cuentas: registra nuevos equipos y accesos.
+PASO 16) Administradores: crea cuentas auxiliares (si las necesitas).
+PASO 17) Cada capitán puede crear suplentes desde su plantilla.
+PASO 18) Jornadas y kills: pulsa GENERAR CALENDARIO, elige las alineaciones y los resultados.
+
+TUS DATOS LOCALES NO SE BORRAN AL REEMPLAZAR CÓDIGO.
+Si aparece un error: haz captura completa de la terminal de VS Code y compártela.
+Para Railway: haz respaldo de PostgreSQL antes de desplegar V3. Cambia las credenciales
+con Mi seguridad (panel) o mediante el comando de sincronización apuntando a la BD
+correcta; las variables nuevas por sí solas no cambian contraseñas ya guardadas.
