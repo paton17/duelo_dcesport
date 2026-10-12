@@ -271,7 +271,18 @@ async function handleForm(form){const kind=form.dataset.form,f=fields(form);cons
     case 'create-match':await api('/admin/matches','POST',{home_id:Number(f.home_id),away_id:Number(f.away_id),round_no:Number(f.round_no)});state.adminTab='matches';await refresh();toast('Nuevo enfrentamiento creado.');break;
     case 'match-result':{
       const selection=selectedMatchLineup(form);
-      const kills=$$('input[data-player-id]:not(:disabled)',form).map(input=>({player_id:Number(input.dataset.playerId),count:Number(input.value)}));
+      // Solo las cajas NUMÉRICAS de los jugadores alineados; las casillas de
+      // selección también tienen data-player-id y antes se enviaban como kills.
+      const ids=[...selection.home_players,...selection.away_players];
+      const kills=ids.map(playerId=>{
+        const input=form.querySelector(`.lineup-kills input[type="number"][data-player-id="${playerId}"]`);
+        if(!input||input.disabled||input.value.trim()==='')
+          throw Error('Completa las kills de todos los jugadores elegidos (puedes poner 0).');
+        const count=Number(input.value);
+        if(!Number.isInteger(count)||count<0||count>999)
+          throw Error('Las kills deben ser números enteros entre 0 y 999.');
+        return{player_id:playerId,count};
+      });
       await api('/admin/matches/'+form.dataset.id+'/result','POST',{score_home:Number(f.score_home),score_away:Number(f.score_away),kills,...selection});closeModal();await refresh();toast('¡Marcador y ranking actualizados para todos!');break;
     }
     case 'add-player':{
